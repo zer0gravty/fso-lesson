@@ -1,0 +1,16 @@
+GET http://localhost:3001/api/notes
+### Successful POST
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "VS Code REST client POST",
+    "important": "false"
+}
+### POST w/o required content in body
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+    "important": "true"
+}
