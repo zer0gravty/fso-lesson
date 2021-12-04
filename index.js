@@ -23,21 +23,17 @@ app.use(cors());
 app.use(requestLogger);
 app.use(express.static("build"));
 
-app.get("/", (req, res) => {
-  res.send(
-    "<h1>If you're seeing this message, something is wrong with the build file.</h1>"
-  );
-});
+app.get("/", (req, res) => res.send('<h1>If you\'re seeing this message, something is wrong with the build file.</h1>'));
 
-app.get("/api/notes", (req, res) => {
-  Note.find({}).then((notes) => {
-    res.json(notes);
-  });
-});
+app.get("/api/notes", (req, res) => Note.find({}).then((notes) => res.json(notes)));
 
 app.get("/api/notes/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const note = Note.findById(id).then((note) => response.json(note));
+  const note = Note.findById(req.params.id).then((note) => response.json(note));
+  if (note) {
+    res.json(note);
+  } else {
+    res.status(404).end();
+  }
 });
 
 app.post("/api/notes", (req, res) => {
