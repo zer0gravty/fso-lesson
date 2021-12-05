@@ -14,9 +14,9 @@ mongoose
   .then(() => logger.info('Connection successful.'))
   .catch((error) => logger.error('Error connecting to Mongo:\n', error));
 
-app.use('/api/notes', notesRouter);
 app.use(express.json());
 app.use(cors());
+app.use('/api/notes', notesRouter);
 app.use(requestLogger);
 app.use(express.static('build'));
 app.use(unknownEndpoint);
