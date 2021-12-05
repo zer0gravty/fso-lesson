@@ -1,31 +1,38 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
 dotenv.config();
 
-const password = process.env.MONGO_PW;
-const user = process.env.MONGO_USER;
-const db = process.env.MONGO_DB;
-const mongo_url = process.env.MONGO_URL;
+const PASSWORD = process.env.MONGO_PW;
+const USER = process.env.MONGO_USER;
+const DB = process.env.MONGO_DB;
+const MONGO_URL = process.env.MONGO_URL;
 
-const url = `mongodb+srv://${user}:${password}@${mongo_url}/${db}?retryWrites=true`;
+const url = `mongodb+srv://${USER}:${PASSWORD}@${MONGO_URL}/${DB}?retryWrites=true`;
 
-console.log('Connecting to Mongo...');
-
+console.log('Connecting to MongPASSWORD...');
 mongoose.connect(url)
-    .then(result => {
-        console.log('Connection successful.')
-    })
-    .catch((error) => {
-        console.error('Error connecting to Mongo:\n', error);
-    });
+  .then(() => {
+    console.log('Connection successful.');
+  })
+  .catch((error) => {
+    console.error('Error connecting to Mongo:\n', error);
+  });
 
 const noteSchema = new mongoose.Schema({
-  content: String,
-  date: Date,
+  content: {
+    required: true,
+    minlength: 5,
+    type: String,
+  },
+  date: {
+    required: true,
+    type: Date,
+  },
   important: Boolean,
 });
 
-noteSchema.set("toJSON", {
+noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -33,6 +40,6 @@ noteSchema.set("toJSON", {
   },
 });
 
-const Note = mongoose.model("Note", noteSchema);
+const Note = mongoose.model('Note', noteSchema);
 
 module.exports = Note;

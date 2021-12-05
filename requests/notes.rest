@@ -12,5 +12,6 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "important": "true"
+    "important": "true",
+    "content": "hiasdf"
 }
