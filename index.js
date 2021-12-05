@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const Note = require("./models/note");
-const { json } = require("express");
+
+const PORT = process.env.PORT || 3001;
 
 const requestLogger = (request, _response, next) => {
   console.log("Method:", request.method);
@@ -11,9 +12,7 @@ const requestLogger = (request, _response, next) => {
   next();
 };
 
-const unknownEndpoint = (_req, res) => {
-  res.status(404).send({ error: "unknown endpoint" });
-};
+const unknownEndpoint = (_req, res) => res.status(404).send({ error: "unknown endpoint" })
 
 const errorHandler = (err, _req, res, next) => {
   console.log(err);
@@ -24,7 +23,6 @@ const errorHandler = (err, _req, res, next) => {
   next(err);
 }
 
-const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.json());
@@ -75,7 +73,9 @@ app.put('/api/notes/:id', (req, res, next) => {
   }
 
 
-  Note.findByIdAndUpdate(req.params.id, note, { new: true }).then(updatedNote => res.json(updatedNote)).catch(err => next(err));
+  Note.findByIdAndUpdate(req.params.id, note, { new: true })
+    .then(updatedNote => res.json(updatedNote))
+    .catch(err => next(err));
 });
 
 app.use(unknownEndpoint);
