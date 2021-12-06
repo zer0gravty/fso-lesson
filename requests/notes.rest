@@ -4,14 +4,13 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "content": "VS Code REST client POST",
-    "important": "false"
+    "content": "HTML is easy",
+    "important": true
 }
 ### POST w/o required content in body
 POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "important": "true",
-    "content": "hiasdf"
+    "important": false
 }

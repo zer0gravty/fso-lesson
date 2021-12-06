@@ -1,8 +1,6 @@
 const notesRouter = require('express').Router();
 const Note = require('../models/note');
 
-notesRouter.get('/', (req, res) => res.send("<h1>If you're seeing this message, something is wrong with the build file.</h1>"));
-
 notesRouter.get('/', (req, res) => Note.find({}).then((notes) => res.json(notes)));
 
 notesRouter.get('/:id', (req, res, next) => {
