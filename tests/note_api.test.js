@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const app = require('../app');
-const { init } = require('../models/note');
 const Note = require('../models/note');
 
 const initialNotes = [
@@ -19,10 +18,7 @@ const initialNotes = [
 
 beforeEach(async () => {
   await Note.deleteMany({});
-  for (const note of initialNotes) {
-    const noteObject = new Note(note);
-    await noteObject.save();
-  }
+  await Note.insertMany(initialNotes);
 });
 
 afterAll(() => mongoose.connection.close());
