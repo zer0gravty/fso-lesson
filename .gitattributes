@@ -1,0 +1,12 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Declare Unix specific filetypes
+*.sh text eol=lf
+*.tsx text eol=lf
+*.ts text eol=lf
+*.jsx text eol=lf
+*.js text eol=lf
+*.scss text eol=lf
+*.css text eol=lf
+*.html text eol=lf

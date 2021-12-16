@@ -2,9 +2,11 @@ GET http://localhost:3001/api/notes
 ### Successful POST
 POST http://localhost:3001/api/notes
 Content-Type: application/json
+### POST Login
+Authorization: <insert bearer token>
 
 {
-    "content": "Lex Luthor is Dumb.",
+    "content": "Superboy is cool.",
     "important": true,
     "userId": "61baa65e0f668e337772e1b4"
 }

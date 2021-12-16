@@ -1,0 +1,26 @@
+### POST Login
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "ckent",
+  "password": "<replace w/ password>"
+}
+
+### POST Login failed w/ incorrect password
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "ckent",
+  "password": "bob"
+}
+
+### POST Login failed w/ unknown username
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "oqueen",
+  "password": "bob"
+}

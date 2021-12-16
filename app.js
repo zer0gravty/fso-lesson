@@ -2,6 +2,7 @@ const express = require('express');
 require('express-async-errors');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const loginRouter = require('./controllers/login');
 const notesRouter = require('./controllers/notes');
 const usersRouter = require('./controllers/users');
 const configs = require('./utils/config');
@@ -19,6 +20,7 @@ mongoose
 app.use(express.json());
 app.use(cors());
 
+app.use('/api/login', loginRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/users', usersRouter);
 

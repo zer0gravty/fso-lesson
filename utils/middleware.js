@@ -1,3 +1,4 @@
+const { response } = require('express');
 const logger = require('./logger');
 
 const requestLogger = (request, _response, next) => {
@@ -17,6 +18,12 @@ const errorHandler = (err, _req, res, next) => {
   }
   if (err.name === 'ValidationError') {
     return res.status(400).json({ error: `malformed body. ${err}` });
+  }
+  if (err.name === 'JsonWebTokenError') {
+    return res.status(401).json({ error: 'invalid token' });
+  }
+  if (err.name === 'TokenExpiredError') {
+    return res.status(401).json({ error: 'token expired' });
   }
 
   next(err);
