@@ -4,8 +4,9 @@ POST http://localhost:3001/api/notes
 Content-Type: application/json
 
 {
-    "content": "HTML is easy",
-    "important": true
+    "content": "Lex Luthor is Dumb.",
+    "important": true,
+    "userId": "61baa65e0f668e337772e1b4"
 }
 ### POST w/o required content in body
 POST http://localhost:3001/api/notes
