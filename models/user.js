@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
@@ -17,10 +18,10 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.set('toJSON', {
-  transform: (_doc, returnedObject) => {
+  transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
-    delete returnedObject.__V;
+    delete returnedObject.__v;
     delete returnedObject.passwordHash;
   },
 });
@@ -28,4 +29,5 @@ userSchema.set('toJSON', {
 const User = mongoose.model('User', userSchema);
 
 userSchema.plugin(uniqueValidator);
+
 module.exports = User;
