@@ -1,10 +1,9 @@
-const { response } = require('express');
 const logger = require('./logger');
 
-const requestLogger = (request, _response, next) => {
-  logger.info('Method:', request.method);
-  logger.info('Path:  ', request.path);
-  logger.info('Body:  ', request.body);
+const requestLogger = (req, _res, next) => {
+  logger.info('Method:', req.method);
+  logger.info('Path:  ', req.path);
+  logger.info('Body:  ', req.body);
   logger.info('---');
   next();
 };

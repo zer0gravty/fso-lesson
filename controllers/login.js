@@ -26,7 +26,7 @@ loginRouter.post('/', async (req, res) => {
     userForToken,
     process.env.SECRET,
     { expiresIn: 60 * 60 },
-  )
+  );
 
   return res.status(200).send({ token, username: user.username, name: user.name });
 });
