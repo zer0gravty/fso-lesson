@@ -18,11 +18,13 @@ const noteSchema = new mongoose.Schema({
 });
 
 noteSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
-  },
+  transform: (_doc, obj) => ({
+    id: obj._id.toString(),
+    content: obj.content,
+    date: obj.date,
+    important: obj.important,
+    user: obj.user,
+  }),
 });
 
 const Note = mongoose.model('Note', noteSchema);

@@ -42,9 +42,7 @@ notesRouter.post('/', async (req, res) => {
   });
 
   const newNote = await note.save();
-  // this probably won't work because of the mongoose bug with mongoose >3. TODO: fix this route
-  // user.notes = user.notes.concat(newNote._id);
-  // await user.save();
+  await User.findByIdAndUpdate(decodedToken.id, { notes: user.notes.concat(newNote._id) });
 
   res.json(newNote);
 });
