@@ -19,13 +19,13 @@ mongoose
 
 app.use(express.json());
 app.use(cors());
+app.use(requestLogger);
+app.use(express.static('build'));
 
 app.use('/api/login', loginRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/users', usersRouter);
 
-app.use(requestLogger);
-app.use(express.static('build'));
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
