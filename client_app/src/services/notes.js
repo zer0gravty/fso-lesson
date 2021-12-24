@@ -8,9 +8,7 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-const getAll = () => {
-  return axios.get(BASE_URL).then((res) => res.data);
-};
+const getAll = () => axios.get(BASE_URL).then((res) => res.data);
 
 const create = async (newObject) => {
   const config = {
@@ -21,9 +19,7 @@ const create = async (newObject) => {
   return res.data;
 };
 
-const update = (id, newObject) => {
-  return axios.put(`${BASE_URL}/${id}`, newObject).then((res) => res.data);
-};
+const update = (id, newObject) => axios.put(`${BASE_URL}/${id}`, newObject).then((res) => res.data);
 
 const noteService = {
   getAll,
