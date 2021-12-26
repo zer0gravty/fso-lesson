@@ -18,6 +18,6 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
   expect(createNote.mock.calls).toHaveLength(1);
   expect(createNote.mock.calls[0][0].content).toBe(
-    'testing of forms could be easier'
+    'testing of forms could be easier',
   );
 });

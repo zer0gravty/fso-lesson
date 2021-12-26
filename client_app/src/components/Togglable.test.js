@@ -10,8 +10,8 @@ describe('<Togglable />', () => {
     component = render(
       <Togglable btnLabel="show...">
         <div className="test-div" />
-      </Togglable>
-    )
+      </Togglable>,
+    );
   });
 
   test('renders its children', () => {

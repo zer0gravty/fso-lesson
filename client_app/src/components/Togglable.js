@@ -18,7 +18,7 @@ const Togglable = forwardRef((props, ref) => {
   return (
     <div>
       <div style={hideWhenVisible} className='togglable-content'>
-        <button type='button' onClick={toggleVisibility}>{props.btnLabel}</button>
+        <button id={`toggle-${props.btnLabel.toLowerCase().replace(/ /g, '-')}`} type='button' onClick={toggleVisibility}>{props.btnLabel}</button>
       </div>
       <div style={showWhenVisible} className='togglable-content'>
         {props.children}

@@ -21,7 +21,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint . --fix",
-    "test:coverage": "cross-env CI=true npm test -- --coverage"
+    "test:coverage": "cross-env CI=true npm test -- --coverage",
+    "test:acc": "cypress open",
+    "test:acc:cli": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^9.2.0",
     "eslint-plugin-jest": "^25.3.0",
     "json-server": "^0.16.3"
   }
