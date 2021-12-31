@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Note from './components/Note';
-import Togglable from './components/Togglable';
+import { Route, Routes } from 'react-router-dom';
+// components
+import NavigationBar from './components/NavigationBar';
 import Notification from './components/Notification';
-import NoteForm from './components/NoteForm';
-import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
+// pages
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
+import NotesPage from './pages/NotesPage';
+import NotePage from './pages/NotePage';
+// services
 import noteService from './services/notes';
 import loginService from './services/login';
+// styling
 import './App.css';
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [user, setUser] = useState(null);
 
@@ -67,12 +72,13 @@ const App = () => {
       });
   };
 
-  const notesToShow = showAll ? notes : notes.filter((note) => note.important);
-
   const handleLogin = async (userObj) => {
     try {
       const validUser = await loginService.login(userObj);
-      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(validUser));
+      window.localStorage.setItem(
+        'loggedNoteappUser',
+        JSON.stringify(validUser),
+      );
 
       noteService.setToken(validUser.token);
       setUser(validUser);
@@ -86,36 +92,27 @@ const App = () => {
 
   return (
     <div>
-      <h1>Notes</h1>
       <Notification message={errorMessage} />
-      {user === null ? (
-        <Togglable btnLabel={'Display Login Form'}>
-          <LoginForm login={handleLogin} />
-        </Togglable>
-      ) : (
-        <div>
-          <p>{user.username} is logged in.</p>
-          <Togglable btnLabel={'Display Notes Form'} ref={noteFormRef}>
-            <NoteForm createNote={addNote} />
-          </Togglable>
-        </div>
-      )}
-      <br />
-
-      <div>
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
-        </button>
-      </div>
-      <ul>
-        {notesToShow.map((note) => (
-          <Note
-            key={note.id}
-            note={note}
-            toggleImportance={() => toggleImportanceOf(note.id)}
-          />
-        ))}
-      </ul>
+      <NavigationBar user={user} />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route
+          path='/login'
+          element={<LoginPage user={user} handleLogin={handleLogin} />}
+        />
+        <Route
+          path='/notes'
+          element={
+            <NotesPage
+              notes={notes}
+              addNote={addNote}
+              toggleImportanceOf={toggleImportanceOf}
+              ref={noteFormRef}
+            />
+          }
+        />
+        <Route path='/notes/:id' element={<NotePage notes={notes} />} />
+      </Routes>
       <Footer />
     </div>
   );
