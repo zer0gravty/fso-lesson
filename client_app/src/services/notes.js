@@ -19,7 +19,10 @@ const create = async (newObject) => {
   return res.data;
 };
 
-const update = (id, newObject) => axios.put(`${BASE_URL}/${id}`, newObject).then((res) => res.data);
+const update = async (id, newObject) => {
+  const res = await axios.put(`${BASE_URL}/${id}`, newObject);
+  return res.data;
+};
 
 const noteService = {
   getAll,

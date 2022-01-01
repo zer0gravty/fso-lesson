@@ -52,24 +52,19 @@ const App = () => {
       });
   };
 
-  const toggleImportanceOf = (id) => {
-    const note = notes.find((n) => n.id === id);
-    const changedNote = { ...note, important: !note.important };
-
-    noteService
-      .update(id, changedNote)
-      .then((updatedNote) => {
-        setNotes(notes.map((n) => (n.id !== id ? note : updatedNote)));
-      })
-      .catch(() => {
-        setErrorMessage(
-          `Note '${note.content}' was already removed from server.`,
-        );
-        setTimeout(() => {
-          setErrorMessage(null);
-        }, 3000);
-        setNotes(notes.filter((n) => n.id !== id));
-      });
+  const toggleImportanceOf = async (id) => {
+    try {
+      const note = notes.find((n) => n.id === id);
+      const changedNote = { ...note, important: !note.important };
+      await noteService.update(id, changedNote);
+      const updatedNotes = notes.map((n) => (n.id !== id ? n : changedNote));
+      setNotes(updatedNotes);
+    } catch (err) {
+      setErrorMessage('Error updating note\'s importance.');
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 3000);
+    }
   };
 
   const handleLogin = async (userObj) => {
