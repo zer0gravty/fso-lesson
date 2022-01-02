@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('');
@@ -22,7 +23,7 @@ const NoteForm = ({ createNote }) => {
           value={newNote}
           onChange={(e) => setNewNote(e.target.value)}
         />
-        <button id='btn-save-note' type='submit'>Save</button>
+        <Button id='btn-save-note' type='submit'>Save</Button>
       </form>
     </div>
   );

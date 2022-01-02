@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// components
+// bootstrap components
+import { Alert } from 'react-bootstrap';
+// custom components
 import NavigationBar from './components/NavigationBar';
 import Notification from './components/Notification';
 import Footer from './components/Footer';
@@ -19,6 +21,7 @@ const App = () => {
   const [notes, setNotes] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [user, setUser] = useState(null);
+  const [alertMessage, setAlertMessage] = useState(null);
 
   const noteFormRef = useRef(null);
 
@@ -77,6 +80,10 @@ const App = () => {
 
       noteService.setToken(validUser.token);
       setUser(validUser);
+      setAlertMessage(`Welcome ${validUser.name}`);
+      setTimeout(() => {
+        setAlertMessage(null);
+      }, 10_000);
     } catch (e) {
       setErrorMessage('Wrong credentials.');
       setTimeout(() => {
@@ -86,9 +93,10 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <Notification message={errorMessage} />
       <NavigationBar user={user} />
+      {alertMessage && <Alert variant='success'>{alertMessage}</Alert>}
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route

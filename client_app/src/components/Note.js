@@ -8,10 +8,8 @@ const Note = ({ note, toggleImportance }) => {
 
   return (
     <>
-      <li className='note'>
-        <Link to={`/notes/${note.id}`}>{note.content}</Link>
-        <button onClick={toggleImportance}>{label}</button>
-      </li>
+      <Link to={`/notes/${note.id}`}>{note.content}</Link>
+      <button onClick={toggleImportance}>{label}</button>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import React, { forwardRef, useState } from 'react';
+import { Table } from 'react-bootstrap';
 import NoteForm from '../components/NoteForm';
 import Note from '../components/Note';
 import Togglable from '../components/Togglable';
@@ -10,7 +11,7 @@ const NotesPage = forwardRef((props, ref) => {
 
   return (
     <section>
-      <h1>Notes</h1>
+      <h2>Notes</h2>
       <Togglable btnLabel={'Display Notes Form'} ref={ref}>
         <NoteForm createNote={addNote} />
       </Togglable>
@@ -20,15 +21,23 @@ const NotesPage = forwardRef((props, ref) => {
           show {showAll ? 'important' : 'all'}
         </button>
       </div>
-      <ul>
-        {notesToShow.map((note) => (
-          <Note
-            key={note.id}
-            note={note}
-            toggleImportance={() => toggleImportanceOf(note.id)}
-          />
-        ))}
-      </ul>
+      <Table striped>
+        <tbody>
+          {notesToShow.map((note) => (
+            <tr key={note.id}>
+              <td>
+                <Note
+                  note={note}
+                  toggleImportance={() => toggleImportanceOf(note.id)}
+                />
+              </td>
+              <td>
+                {note.user.name}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </section>
   );
 });

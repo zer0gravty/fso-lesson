@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Form, Button } from 'react-bootstrap';
 
 const LoginForm = ({ login }) => {
   const navigate = useNavigate();
@@ -20,26 +21,24 @@ const LoginForm = ({ login }) => {
     <div>
       <h2>Login</h2>
 
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
+      <Form onSubmit={handleLogin}>
+        <Form.Group>
+          <Form.Label>username</Form.Label>
+          <Form.Control
             id='username'
             type='text'
             value={username}
             onChange={(e) => setUsername(e.target.value)} />
-        </div>
-        <div>
-          password
-          <input
+          <Form.Label>password</Form.Label>
+          <Form.Control
             id='password'
             type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-        <button id='btn-login' type='submit'>Login</button>
-      </form>
+          <Button variant='primary' id='btn-login' type='submit'>Login</Button>
+        </Form.Group>
+      </Form>
     </div>
   );
 };

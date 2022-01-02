@@ -9,6 +9,11 @@ const LoginPage = ({ user, handleLogin }) => (
         <LoginForm login={handleLogin} />
       </Togglable>
     )}
+    {user !== null && (
+      <>
+        <p>{user.name} is logged in.</p>
+      </>
+    )}
   </div>
 );
 
