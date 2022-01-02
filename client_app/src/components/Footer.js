@@ -1,20 +1,10 @@
 import React from 'react';
+import CustomComponents from './CustomComponents';
 
-const Footer = () => {
-  const footerStyle = {
-    color: 'green',
-    fontStyle: 'italic',
-    fontSize: 16,
-  };
-
-  return (
-    <div style={footerStyle}>
-      <br />
-      <em>
-        Note app 2021
-      </em>
-    </div>
-  );
-};
+const Footer = () => (
+  <CustomComponents.Footer>
+    <em>Note App 2021</em>
+  </CustomComponents.Footer>
+);
 
 export default Footer;

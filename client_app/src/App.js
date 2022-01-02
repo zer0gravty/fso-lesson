@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// bootstrap components
-import { Alert } from 'react-bootstrap';
+// bootstrap or Material UI components
+// import { Alert } from 'react-bootstrap';
+import { Container } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 // custom components
 import NavigationBar from './components/NavigationBar';
 import Notification from './components/Notification';
@@ -84,19 +86,23 @@ const App = () => {
       setTimeout(() => {
         setAlertMessage(null);
       }, 10_000);
+      return true;
     } catch (e) {
       setErrorMessage('Wrong credentials.');
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
+      return false;
     }
   };
 
   return (
-    <div className="container">
+    <Container>
+      {/* <div className="container"> if using bootstrap */}
       <Notification message={errorMessage} />
       <NavigationBar user={user} />
-      {alertMessage && <Alert variant='success'>{alertMessage}</Alert>}
+      {/* {alertMessage && <Alert variant='success'>{alertMessage}</Alert>} react-bootstrap */}
+      {alertMessage && <Alert severity='success'>{alertMessage}</Alert>}
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route
@@ -117,7 +123,8 @@ const App = () => {
         <Route path='/notes/:id' element={<NotePage notes={notes} />} />
       </Routes>
       <Footer />
-    </div>
+      {/* </div> */}
+    </Container>
   );
 };
 
